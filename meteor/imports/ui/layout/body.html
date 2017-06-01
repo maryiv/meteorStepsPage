@@ -1,0 +1,237 @@
+<body class="home page-template-default page page-id-185 group-blog onist-front-page page-two-column colors-light">
+<main class="main">
+    <header>
+        <div class="wrap">
+            <div class="logo">
+                <a href="/" title="Onist">
+                    <img src="img/logo.png" alt="Onist">
+                </a>
+            </div>
+            <div class="header-right">
+                <div class="header-user-info">
+                    <img class="header-user-info__img" src="img/user-dummy.png">
+                    <div class="header-user-info__div">Jack Black</div>
+                </div>
+                <div class="header-links">
+                    <a href="#" class="arrow-down">
+                        <svg height="8" width="12">
+                            <polyline points="0,0 6,8 12,0" stroke-width="1" stroke="#eeeeee" fill="none"></polyline>
+                        </svg>
+                    </a>
+                    <div tabindex="-1" id="headerDropdownMenu" class="menu-dropdown-link">
+                        <ul>
+                            <li>
+                                <a href="/">Item1</a>
+                            </li>
+                            <li>
+                                <a href="/">Item2</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="main-title">
+        <div class="wrap">My estate plan</div>
+        <div class="right-options">
+            <a href="/" class="right-options__link">Option 2</a>
+            <div class="right-options__button cross-big">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+    <div class="spanning">
+        <div class="sidebar-wrapper">
+            <div class="wrap">
+                <ol class="plan-steps">
+                    {{#each steps}}
+                        {{> step}}
+                    {{/each}}
+                </ol>
+                <div class="progress-status">
+                    <div class="circular-progress">
+                        <svg height="100" width="100" viewPort="0 0 100 100" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <circle class="circular-progress__background"
+                                    cx="50" cy="50" r="47" fill="none"></circle>
+                            <circle class="circular-progress__track"
+                                    cx="50" cy="50" r="47" fill="none"
+                                    stroke-dasharray="295.30971" stroke-dashoffset="{{arcLength}}"
+                                    transform="rotate(-90 50 50)"></circle>
+                            <text class="circular-progress__text" x="50" y="50" dy="7">{{fillPercentage}}%</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="plan-container">
+            <div class="wrap">
+                <p class="plan-container__description">
+                    Assets and Liabilities
+                </p>
+                <form class="form plan-container__form" enctype="multipart/form-data">
+                    <div class="plan-container__form__row plan-container__form__row--any_assets">
+                        Do you have any <span class="attention">assets</span>?
+                        <div class="radio-inline">
+                            <input type="radio" name="any_assets" value="1"
+                                   id="any_assets_yes" class="radio-inline__input"
+                                   checked={{showAnyAssets}}>
+                            <label for="any_assets_yes" class="radio-inline__label">Yes</label>
+                            <div class="radio-inline__radio-check"></div>
+                        </div>
+                        <div class="radio-inline">
+                            <input type="radio" name="any_assets" value="0"
+                                   id="any_assets_no" class="radio-inline__input"
+                                   checked={{not showAnyAssets}}>
+                            <label for="any_assets_no" class="radio-inline__label">No</label>
+                            <div class="radio-inline__radio-check"></div>
+                        </div>
+                    </div>
+                    {{#if showAnyAssets}}
+                        {{> assets}}
+                    {{/if}}
+                    <div class="plan-container__form__row plan-container__form__row--other_assets">
+                        Do you have any other <span class="attention">assets</span>?
+                        <div class="radio-inline">
+                            <input type="radio" name="other_assets" value="1"
+                                   id="other_assets_yes" class="radio-inline__input"
+                                   checked={{showOtherAssets}}>
+                            <label for="other_assets_yes"
+                                   class="plan-form-container__form__row__label radio-inline__label">Yes</label>
+                            <div class="radio-inline__radio-check"></div>
+                        </div>
+                        <div class="radio-inline">
+                            <input type="radio" name="other_assets" value="0"
+                                   id="other_assets_no" class="radio-inline__input"
+                                   checked={{not showOtherAssets}}>
+                            <label for="other_assets_no"
+                                   class="plan-form-container__form__row__label radio-inline__label">No</label>
+                            <div class="radio-inline__radio-check"></div>
+                        </div>
+                    </div>
+                    {{#if showOtherAssets}}
+                        {{> other}}
+                    {{/if}}
+                    <div class="plan-container__form__row plan-container__form__row--any_liabilities">
+                        Do you have any <span class="attention">liabilities</span>?
+                        <div class="radio-inline">
+                            <input type="radio" name="any_liabilities" value="1"
+                                   id="any_liabilities_yes" class="radio-inline__input"
+                                   checked={{showAnyLiabilities}}>
+                            <label for="any_liabilities_yes"
+                                   class="plan-form-container__form__row__label radio-inline__label">Yes</label>
+                            <div class="radio-inline__radio-check"></div>
+                        </div>
+                        <div class="radio-inline">
+                            <input type="radio" name="any_liabilities" value="0"
+                                   id="any_liabilities_no" class="radio-inline__input"
+                                   checked={{not showAnyLiabilities}}>
+                            <label for="any_liabilities_no"
+                                   class="plan-form-container__form__row__label radio-inline__label">No</label>
+                            <div class="radio-inline__radio-check"></div>
+                        </div>
+                    </div>
+                    {{#if showAnyLiabilities}}
+                        {{> liabilities}}
+                    {{/if}}
+                    <div class="plan-container__form__row plan-container__form__row--action">
+                        <button type="submit" class="plan-container__form__row__button">
+                            GO TO ESTATE PLAN PREPAREDNESS
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+
+<template name="assets">
+    <div class="plan-container__form__additional">
+        <p class="plan-container__form__additional_title">Asset</p>
+        <div class="plan-container__form__row plan-container__form__row--no-padding">
+            <div class="plan-container__form__row__field">
+                <div class="field field--require">
+                    <label for="asset_type" class="plan-form-container__form__row__label">
+                        Asset Type
+                    </label>
+                    <select id="asset_type" class="form__field__select" name="real_estate">
+                        <option selected="selected" value="real_estate">Real Estate</option>
+                        <option value="real_estate_2">Real Estate 2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="plan-container__form__row__field">
+                <div class="field field--require">
+                    <label for="asset_name" class="plan-form-container__form__row__label">
+                        Asset Name
+                    </label>
+                    <input id="asset_name" type="text" class="form__field__input" name="asset_name"
+                           placeholder="Real Estate">
+                </div>
+            </div>
+            <div class="plan-container__form__row__field">
+                <div class="field field--require">
+                    <label for="owner" class="plan-form-container__form__row__label">
+                        Owner
+                    </label>
+                    <select id="owner" class="form__field__select" name="owner">
+                        <option selected="selected" value="jack_black">Jack Black</option>
+                        <option value="jack_black_2">Jack Black 2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="plan-container__form__row__field">
+                <div class="field">
+                    <label for="estimated_valueowner" class="plan-form-container__form__row__label">
+                        Estimated Value
+                    </label>
+                    <input id="estimated_valueowner" type="text" class="form__field__input"
+                           name="estimated_valueowner" placeholder="Real Estate">
+                </div>
+            </div>
+            <div class="plan-container__form__row__field">
+                <div class="field">
+                    <label for="currency" class="plan-form-container__form__row__label">
+                        Currency
+                    </label>
+                    <select id="currency" class="form__field__select" name="currency">
+                        <option selected="selected" value="canadian_dollar">Canadian Dollar</option>
+                        <option value="us_dollar">US Dollar</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="plan-container__form__row">
+            Upload your important documents <div class="plan-container__form__additional_hint"></div>
+        </div>
+        <div class="plan-container__form__row__field">
+            <div class="plan-container__form__row__drag-box">
+                <div class="plan-container__form__row">
+                    <input id="file" class="field field--file field--hidden" type="file"
+                           name="files[]" multiple />
+                    Drag-and-drop your files here or
+                    <label for="file" class="plan-form-container__form__row__label">Browse</label> or
+                    <a href="/" class="plan-form-container__form__row__link">Open Vault</a>
+                </div>
+            </div>
+        </div>
+        <div class="plan-container__form__row">
+            To enter more detailed information, which differs by asset type,
+            <a href="/" class="plan-form-container__form__row__link">click here</a>.
+        </div>
+    </div>
+</template>
+
+<template name="other">
+    <div class="plan-container__form__additional">
+        <p class="plan-container__form__additional_title">Other</p>
+    </div>
+</template>
+
+<template name="liabilities">
+    <div class="plan-container__form__additional">
+        <p class="plan-container__form__additional_title">Liabilities</p>
+    </div>
+</template>

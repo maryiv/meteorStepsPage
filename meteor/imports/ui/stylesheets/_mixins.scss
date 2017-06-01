@@ -1,0 +1,56 @@
+//
+// Mixins
+// --------------------------------------------------
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+  background-clip: padding-box;  /* stops bg color from leaking outside the border: */
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+@mixin center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin abs-pos ($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  position: absolute;
+}
+
+@mixin hover-state {
+  &:hover, &:active, &:focus {
+    @content;
+  }
+}
+
+@function circular-progress($maxPercent, $percent, $color-bar, $color-back) {
+  $increment: 360 / $maxPercent;
+  $half: round($maxPercent / 2);
+  $background-image: '';
+
+  @if $percent < $half {
+    $nextdeg: 90deg +  ($increment * $percent);
+
+    $background-image: 'linear-gradient(90deg, #{$color-back} 50%, transparent 50%, transparent),
+    linear-gradient(#{$nextdeg}, #{$color-bar} 50%, #{$color-back} 50%, #{$color-back})';
+
+  } @else {
+    $nextdeg: -90deg + ($increment * ($percent - $half));
+
+    $background-image: 'linear-gradient(#{$nextdeg}, #{$color-bar} 50%, transparent 50%, transparent),
+      linear-gradient(270deg, #{$color-bar} 50%, #{$color-back} 50%, #{$color-back})';
+  }
+  @return unquote($background-image);
+}

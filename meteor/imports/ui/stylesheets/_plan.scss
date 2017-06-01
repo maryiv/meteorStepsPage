@@ -1,0 +1,232 @@
+.sidebar-wrapper {
+  @include abs-pos(calc(#{$page-title} + 1px), auto, 0, 0);
+  width: $sidebar-width;
+  background: $white-five;
+  @media screen and (max-width: $sidebar-view) {
+    position: relative;
+    width: 100%;
+    top: 0;
+  }
+  .plan-steps {
+    padding: 22px 0 22px 38px;
+    counter-reset: steps-counter;
+    position: relative;
+    margin: 0;
+    .plan-steps__item {
+      line-height: calc(#{$steps-item} + 2 * #{$steps-item-border});
+      position: relative;
+      font-size: 15px;
+      cursor: pointer;
+      &:not(:first-child) {
+        margin-top: 22px;
+      }
+      &:before {
+        content: counter(steps-counter);
+        counter-increment: steps-counter;
+        position: absolute;
+        left: -34px;
+        width: $steps-item;
+        height: $steps-item;
+        line-height: $steps-item;
+        font-weight: 600;
+        text-align: center;
+        border: $steps-item-border solid;
+        @include border-radius(50%);
+      }
+      &:not(:last-child):after {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: -25px;
+        height: 24px;
+        width: $steps-item-border;
+        background: $brownish-grey;
+      }
+      &.plan-steps__item--checked:before {
+        content: '\f00c';
+        font-size: 12px;
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: inherit;
+        background: $green;
+        border-color: $green;
+        color: #ffffff;
+      }
+      &.plan-steps__item--current {
+        font-weight: 600;
+        &:before {
+          box-shadow: 0 0 0 2px $white-three, 0 0 0 4px $brownish-grey;
+          z-index: 3;
+        }
+      }
+    }
+  }
+  .progress-status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    @media screen and (max-width: $sidebar-view) {
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .circular-progress {
+      position: relative;
+      height: $circular-progress;
+      width: $circular-progress;
+      margin: 30px auto;
+      @media screen and (max-width: $sidebar-view) {
+        margin: 10px auto;
+      }
+      .circular-progress__background {
+        stroke: $white-three;
+        stroke-width: 6;
+      }
+      .circular-progress__track {
+        stroke: $steel-blue;
+        stroke-width: 6;
+        stroke-linecap: round;
+        transition: stroke-dashoffset 1s linear;
+      }
+      .circular-progress__text {
+        font-family: 'ProximaNova', sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+        fill: $steel-blue;
+        text-anchor: middle;
+      }
+    }
+  }
+}
+.plan-container {
+  padding-left: $sidebar-width;
+  @media screen and (max-width: $sidebar-view) {
+    padding-left: 0;
+  }
+  .plan-container__description {
+    font-size: 17px;
+    font-weight: 500;
+    margin-top: $wrap-padding;
+    margin-bottom: $wrap-padding;
+  }
+  .plan-container__form__additional {
+    padding-left: $wrap-padding;
+    padding-right: $wrap-padding;
+    margin-bottom: $wrap-padding;
+    border: 1px solid $white-two;
+    @include border-radius(2px);
+    .plan-container__form__additional_title {
+      font-size: 15px;
+      font-weight: 500;
+      text-transform: uppercase;
+      margin-top: 11px;
+      margin-bottom: $wrap-padding;
+    }
+    .plan-container__form__additional_hint {
+      position: relative;
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-bottom: -2px;
+      border: 1px solid $warm-grey;
+      @include border-radius(50%);
+      cursor: pointer;
+      &:before {
+        content: '?';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        color: $warm-grey;
+        font-size: 10px;
+      }
+    }
+  }
+  .plan-container__form__row {
+    padding-bottom: 20px;
+    &.plan-container__form__row--no-padding {
+      padding-bottom: 0;
+      .plan-container__form__row__field {
+        padding-bottom: 20px;
+      }
+    }
+    .attention {
+      border-bottom: 1px dashed $brownish-grey;
+      cursor: pointer;
+    }
+    .plan-container__form__row__field {
+      max-width: 220px;
+      margin-right: $wrap-padding;
+      display: inline-block;
+      .field {
+        display: inline-block;
+        vertical-align: top;
+        &.field--require .plan-form-container__form__row__label {
+          position: relative;
+          &:after {
+            content: '*';
+          }
+        }
+        .plan-form-container__form__row__label {
+          font-size: 13px;
+          font-weight: 300;
+        }
+      }
+    }
+  }
+  .plan-container__form__row__drag-box {
+    position: relative;
+    width: calc(100% - 2*#{$wrap-padding} - 6px);
+    padding: 42px $wrap-padding;
+    text-align: center;
+    background: $white-five;
+    border: dashed 3px $pinkish-grey;
+    @include border-radius(6px);
+    margin-bottom: 20px;
+    z-index: 1;
+    &:before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: 2px solid $white-five;
+      @include border-radius(6px);
+      z-index: -1;
+    }
+    .plan-container__form__row {
+      padding: 0;
+      z-index: 2;
+    }
+    .plan-form-container__form__row__label {
+      cursor: pointer;
+      text-decoration: underline;
+      color: $steel-blue;
+    }
+  }
+  .plan-form-container__form__row__link {
+    color: $steel-blue;
+    @include hover-state {
+      color: $steel-blue;
+    }
+  }
+  .plan-container__form__row__button {
+    background: $steel-blue;
+    padding: 8px 30px;
+    margin-bottom: $wrap-padding;
+    float: right;
+    font-size: 12px;
+    font-weight: 500;
+    color: $white-three;
+    border: none;
+    @include border-radius(4px);
+  }
+}

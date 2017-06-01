@@ -1,0 +1,11 @@
+# OSX
+#
+.DS_Store
+
+# Project files
+#
+.idea
+
+# Log files
+#
+*.log
